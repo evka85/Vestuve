@@ -4,6 +4,29 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <!--<param-value>south-street</param-value>-->
+        <!--<param-value>ui-lightness</param-value>-->
+        <!--<param-value>swanky-purse</param-value>-->
+        <!--<param-value>humanity</param-value>-->
+        <!--<param-value>rocket</param-value>-->
+        <param-value>smoothness</param-value>
+        <!--<param-value>sunny</param-value>-->
+        <!--<param-value>swanky-purse</param-value>-->
+    </context-param>
+    <filter>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+        <init-param>
+            <param-name>thresholdSize</param-name>
+            <param-value>2097152</param-value>
+        </init-param>
+        <init-param>
+            <param-name>uploadDirectory</param-name>
+            <param-value>/tmp</param-value>
+        </init-param>
+    </filter>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -11,7 +34,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
+        <url-pattern>*.jsf</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -19,6 +42,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>index.jsf</welcome-file>
     </welcome-file-list>
 </web-app>

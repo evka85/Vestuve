@@ -7,7 +7,24 @@
     <body>
         <ui:composition template="./layout/pageTemplate.xhtml">
             <ui:define name="content">
-                Hello, I'm your index, Sir..
+                <div class="ui-grid ui-grid-responsive">
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-12">
+                            <img src="resources/img/BigBanner.png" style="max-width: 100%"/>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-12">
+                            <h1>
+                                <h:outputText value="#{msg['text.welcome.heading']}"/>
+                            </h1>
+                            <p style="font-size: 16pt">
+                                <h:outputText value="#{msg['text.welcome']}"/>
+                            </p>
+                        </div>
+                    </div>
+                </div>    
+                <ui:include src="layout/guest_list_horizontal.xhtml"/>
             </ui:define>
         </ui:composition>
     </body>

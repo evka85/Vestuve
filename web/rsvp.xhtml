@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body>
+        <ui:composition template="./layout/pageTemplate.xhtml">
+            <ui:define name="content">
+                <div class="ui-grid ui-grid-responsive">
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-12">
+                            <img src="resources/img/BigBanner.png" style="max-width: 100%"/>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-12">
+                            <h1>
+                                <h:outputText value="#{msg['text.rsvp.heading']}"/>
+                            </h1>
+                            <p style="font-size: 16pt">
+                                <h:outputText value="#{msg['text.rsvp']}"/>
+                            </p>
+                            <p:panel id="login_panel" header="#{msg['text.rsvp.f_secret.header']}" visible="#{rsvpView.guest == null}" styleClass="customWidgetHeader">
+                                <h:form id="rsvp_secret_form">
+                                    <p:growl id="growl" showDetail="true" sticky="false"/>
+                                    <p:messages id="messages" showDetail="true"/>
+
+                                    <p:outputLabel for="secret" value="#{msg['text.rsvp.f_secret.label']}"/>
+                                    <p:inputText id="secret" value="#{rsvpView.secret}" required="true" requiredMessage="Please enter the secret phrase"/>
+
+                                    <p:commandButton value="#{msg['text.rsvp.f_secret.btn_go']}" action="#{rsvpView.loadGuest()}" update="login_panel rsvp_data_panel"/>
+                                </h:form>
+                            </p:panel>
+                            
+                            <p:panel id="rsvp_data_panel" header="#{msg['text.rsvp.f_data.header']} (#{rsvpView.guest.name})" visible="#{rsvpView.guest != null}" styleClass="customWidgetHeader">
+                                <p:messages id="messages" showDetail="true"/>
+
+                                <p:separator/>
+
+                                <div class="ui-grid ui-grid-responsive">
+                                    <div class="ui-grid-col-1">
+                                        <div style="padding-bottom: 75%; position: relative">
+                                            <div style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: hidden">
+                                                <img src="#{rsvpView.guest.pictureUrl}" style="width: 100%; z-index: 2"/>
+                                                <img src="#{rsvpView.guest.state == 'ATTENDING' ? 'resources/img/checkbox.png' : (rsvpView.guest.state == 'NOT_ATTENDING' ? 'resources/img/sadface.png' : 'resources/img/questionmark.jpg')}" style="width: 25%; z-index: 3; bottom: 0; right: 0; position: absolute; float: right"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ui-grid-col-11" style="padding-left: 20px">
+                                        <h:form id="form_pic_upload" enctype="multipart/form-data">
+                                            <p:growl id="pic_messages" showDetail="true" />
+                                            <p:fileUpload value="#{rsvpView.uploadedPicture}" label="#{msg['text.rsvp.f_data.lbl_change_pic']}" 
+                                                          mode="simple" skinSimple="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" accept="/(\.|\/)(gif|jpe?g|png)$/"/>
+                                            <br/>
+                                            <p:commandButton id="btn_pic_upload" value="#{msg['text.rsvp.f_data.lbl_upload_pic']}" ajax="false" actionListener="#{rsvpView.uploadPicture}"/>
+                                        </h:form>
+                                    </div>
+                                </div>
+
+                                <p:separator/>
+
+                                <h:form id="rsvp_data_form">
+                                    <p:growl id="growl" showDetail="true" sticky="false"/>
+                                    
+                                    <br/>
+                                    <h:outputLabel for="attending" value="#{msg['text.rsvp.f_data.lbl_attending']}"/>
+                                    <p:selectOneButton id="attending" value="#{rsvpView.guest.state}">
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_UNKNOWN']}" itemValue="UNKNOWN"/>
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_ATTENDING']}" itemValue="ATTENDING"/>
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_NOT_ATTENDING']}" itemValue="NOT_ATTENDING"/>
+                                    </p:selectOneButton>
+                                    
+                                    <br/>
+                                    <h:outputLabel for="attending_church" value="#{msg['text.rsvp.f_data.lbl_attending_church']}"/>
+                                    <p:selectOneButton id="attending_church" value="#{rsvpView.guest.attendingChurch}">
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_UNKNOWN']}" itemValue="UNKNOWN"/>
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_ATTENDING']}" itemValue="ATTENDING"/>
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_NOT_ATTENDING']}" itemValue="NOT_ATTENDING"/>
+                                    </p:selectOneButton>
+                                    
+                                    <br/>
+                                    <h:outputLabel for="gap_activity" value="#{msg['text.rsvp.f_data.lbl_gap_activity']}"/>
+                                    <p:selectOneButton id="gap_activity" value="#{rsvpView.guest.gapActivity}">
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_gap_activity_UNKNOWN']}" itemValue="UNKNOWN"/>
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_gap_activity_BUS']}" itemValue="BUS"/>
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_gap_activity_TOUR_VILNIUS']}" itemValue="TOUR_VILNIUS"/>
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_gap_activity_TOUR_PRESIDENT_OFFICE']}" itemValue="TOUR_PRESIDENT_OFFICE"/>
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_gap_activity_FREE_TIME']}" itemValue="FREE_TIME"/>
+                                    </p:selectOneButton>
+                                    
+                                    <br/>
+                                    <h:outputLabel for="menu_choice" value="#{msg['text.rsvp.f_data.lbl_menu_choice']}"/>
+                                    <p:selectOneButton id="menu_choice" value="#{rsvpView.guest.menuChoice}">
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_menu_choice_UNKNOWN']}" itemValue="UNKNOWN"/>
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_menu_choice_PORK']}" itemValue="PORK"/>
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_menu_choice_CHICKEN']}" itemValue="CHICKEN"/>
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_menu_choice_VEGETARIAN']}" itemValue="VEGETARIAN"/>
+                                    </p:selectOneButton>
+
+                                    <br/>
+                                    <h:outputLabel for="attending_afterparty" value="#{msg['text.rsvp.f_data.lbl_attending_afterparty']}"/>
+                                    <p:selectOneButton id="attending_afterparty" value="#{rsvpView.guest.attendingAfterparty}">
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_UNKNOWN']}" itemValue="UNKNOWN"/>
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_ATTENDING']}" itemValue="ATTENDING"/>
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_NOT_ATTENDING']}" itemValue="NOT_ATTENDING"/>
+                                    </p:selectOneButton>
+                                    
+                                    <br/>
+                                    <p:commandButton value="#{msg['text.rsvp.f_data.btn_save']}" action="#{rsvpView.saveGuestInfo()}" update="login_panel rsvp_data_panel"/>
+<!--                                    <p:steps activeIndex="1" readonly="false" styleClass="custom">
+                                        <p:menuitem value="Personal" url="#" />
+                                        <p:menuitem value="Seat Selection" url="#"/>
+                                        <p:menuitem value="Payment" url="#"/>
+                                        <p:menuitem value="Confirmation" url="#"/>
+                                    </p:steps>-->
+                                </h:form>
+                            </p:panel>
+                        </div>
+                    </div>
+                </div>
+                <div style="height: 100px"/>
+                <ui:include src="layout/guest_list_horizontal.xhtml"/>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
+

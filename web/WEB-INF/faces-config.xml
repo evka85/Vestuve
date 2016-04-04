@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+    <application>
+        <locale-config>
+            <default-locale>en</default-locale>
+            <supported-locale>en</supported-locale>
+            <supported-locale>lt</supported-locale>
+        </locale-config>
+        <resource-bundle>
+            <base-name>com.vestuve.i18n.messages</base-name>
+            <var>msg</var>
+        </resource-bundle>
+    </application>
+
+<!-- ===================== Global Navigation rules ===================== -->
+
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>navHome</from-outcome>
+            <to-view-id>index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>navGuests</from-outcome>
+            <to-view-id>guests.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>navContact</from-outcome>
+            <to-view-id>contact.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>navRsvp</from-outcome>
+            <to-view-id>rsvp.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>navChat</from-outcome>
+            <to-view-id>chat.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+<!-- ===================== RSVP navigation rules ===================== -->
+    <navigation-rule>
+        <from-view-id>rsvp.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>rsvp.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>           
+</faces-config>
