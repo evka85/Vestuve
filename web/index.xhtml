@@ -3,28 +3,215 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <body>
         <ui:composition template="./layout/pageTemplate.xhtml">
             <ui:define name="content">
                 <div class="ui-grid ui-grid-responsive">
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-12">
-                            <img src="resources/img/BigBanner.png" style="max-width: 100%"/>
+                            <img src="resources/img/BigBanner.png" style="max-width: 100%; min-width: 100%"/>
+                        </div>
+                    </div>
+                    <ui:include src="layout/guest_list_horizontal.xhtml"/>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-12">
+                            <c:if test="#{language.language == 'en'}">
+                                <h1 style="text-align: center; text-decoration: underline">Dear Friends!</h1>
+                                <p style="text-align: center" class="welcome-text-normal">
+                                    <span>The text below should be translated soon..</span><br/>
+                                    <span>Kaip žinia, po daugybės išbandymų ir ilgas valandas trukusių svarstymų</span><br/>
+                                    <span class="strongest">pagaliau supratome, kad DVIESE SMAGIAU,</span><br/>
+                                    <span>ir nusprendėme</span><span class="strongest bold"> SUJUNGTI SAVO GYVENIMUS Į VIENĄ!</span><br/>
+                                    <span class="strong">Tapti šeima ir pradėti dalintis viena pavarde</span><span class="strongest"> – RIMTAS ŽINGSNIS,</span><br/>
+                                    <span class="strongest">todėl norime </span><span class="strongest bold"> GARSIAI IR SPALVINGAI </span><span class="strongest">tai atšvęsti.</span><br/>
+                                    <span>Daug planavome ir ruošėmės savo</span><span class="strongest"> FIESTAI </span><span>Vilniaus senamiestyje, kurioje norime pamatyti</span><span class="strongest bold"> JUS VISUS!</span><br/>
+                                    <span class="strongest bold">KUO DAUGIAU JŪSŲ, TUO DAUGIAU GARSO IR SPALVŲ!</span><br/>
+                                    <span>Čia rasite nemažai informacijos apie mūsų vestuvę ir reikės atsakyti į keletą klausimų,</span><br/>
+                                    <span class="strongest">tačiau visko neatskleisime…</span><br/>
+                                    <span>Tai galėsite pamatyti savo akimis š.m.</span><span class="strongest bold"> LIEPOS 22 d.</span><br/>
+                                    <span class="strongest">Iki susitikimo!</span><br/>
+                                    <br/>
+                                </p>
+                            </c:if>
+                            <c:if test="#{language.language == 'lt'}">
+                                <h1 style="text-align: center; text-decoration: underline">Sveiki Mielieji!</h1>
+                                <p style="text-align: center" class="welcome-text-normal">
+                                    <!--span style="text-decoration: underline" class="strongest">Sveiki Mielieji!</span><br/-->
+                                    <span>Kaip žinia, po daugybės išbandymų ir ilgas valandas trukusių svarstymų</span><br/>
+                                    <span class="strongest">pagaliau supratome, kad DVIESE SMAGIAU,</span><br/>
+                                    <span>ir nusprendėme</span><span class="strongest bold"> SUJUNGTI SAVO GYVENIMUS Į VIENĄ!</span><br/>
+                                    <span class="strong">Tapti šeima ir pradėti dalintis viena pavarde</span><span class="strongest"> – RIMTAS ŽINGSNIS,</span><br/>
+                                    <span class="strongest">todėl norime </span><span class="strongest bold"> GARSIAI IR SPALVINGAI </span><span class="strongest">tai atšvęsti.</span><br/>
+                                    <span>Daug planavome ir ruošėmės savo</span><span class="strongest"> FIESTAI </span><span>Vilniaus senamiestyje, kurioje norime pamatyti</span><span class="strongest bold"> JUS VISUS!</span><br/>
+                                    <span class="strongest bold">KUO DAUGIAU JŪSŲ, TUO DAUGIAU GARSO IR SPALVŲ!</span><br/>
+                                    <span>Čia rasite nemažai informacijos apie mūsų vestuvę ir reikės atsakyti į keletą klausimų,</span><br/>
+                                    <span class="strongest">tačiau visko neatskleisime…</span><br/>
+                                    <span>Tai galėsite pamatyti savo akimis š.m.</span><span class="strongest bold"> LIEPOS 22 d.</span><br/>
+                                    <span class="strongest">Iki susitikimo!</span><br/>
+                                    <br/>
+                                </p>
+                            </c:if>
+                        </div>
+                    </div>
+                    <!-- church -->
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-12">
+                            <hr style="height:2px;border:none;color:#333;background-color:#333;"/>
+                            <h1 style="text-align: center;"><h:outputText value="${msg['text.home.schedule.heading']}"/></h1>
+                                <p style="text-align: center" class="welcome-text-normal">
+                                    <h:outputText value="${msg['text.home.schedule.church.1']}"/><br/>
+                                    <h:outputText value="${msg['text.home.schedule.church.2']}"/>
+                                </p>                            
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-6">
+                            <img src="resources/img/baznycia.jpg" style="max-width: 100%; min-width: 100%"/>
+                        </div>
+                        <div class="ui-grid-col-6 google-maps">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2306.778443898628!2d25.280717216639044!3d54.67832788027973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dd9414e7f0603b%3A0xa0c5cd4aa64fd38f!2s%C5%A0v.+Mikalojaus+g.+4%2C+Vilnius+01133%2C+Lithuania!5e0!3m2!1sen!2sfr!4v1462332475260" frameborder="0" style="border:0" marginheight="0" allowfullscreen="true"></iframe>
                         </div>
                     </div>
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-12">
-                            <h1>
-                                <h:outputText value="#{msg['text.welcome.heading']}"/>
-                            </h1>
-                            <p style="font-size: 16pt">
-                                <h:outputText value="#{msg['text.welcome']}"/>
+                                <p style="text-align: center" class="welcome-text-normal">
+                                    <h:outputText value="${msg['text.home.schedule.fiesta.1']}"/><br/>
+                                    <h:outputText value="${msg['text.home.schedule.fiesta.2']}"/>
+                                </p>                            
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-6">
+                            <img src="resources/img/kiemelis.jpg" style="max-width: 100%; min-width: 100%"/>
+                        </div>
+                        <div class="ui-grid-col-6 google-maps">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2306.5702563894256!2d25.28413601663921!3d54.681991980280664!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dd94169d538721%3A0x97403dc658ec43e6!2sFiorentino!5e0!3m2!1sen!2sfr!4v1462334804085" width="600" height="450" frameborder="0" style="border:0" allowfullscreen="true"></iframe>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-12">
+                            <p style="text-align: center" class="welcome-text-normal">
+                                <h:outputText value="${msg['text.home.schedule.fiesta.3']}"/><br/>
+                                <h:outputText value="${msg['text.home.schedule.fiesta.4']}"/>
+                            </p>                            
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    
+                    <!-- theme -->
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-12">
+                            <hr style="height:2px;border:none;color:#333;background-color:#333;"/>
+                            <h1 style="text-align: center;"><h:outputText value="${msg['text.home.theme.heading']}"/></h1>
+                            <p style="text-align: center" class="welcome-text-normal">
+                                <h:outputText value="${msg['text.home.schedule.theme.1']}"/><br/>
+                                <h:outputText class="bold" value="${msg['text.home.schedule.theme.important']}"/><h:outputText value="${msg['text.home.schedule.theme.2']}"/><br/>
+                                <br/>
+                                <h:outputText value="${msg['text.home.schedule.theme.3']}"/><br/>
+                                <br/>
+                            </p>
+                            <!--p:contentFlow value="#{['women_hippie_fashion1.png', 'women_hippie_fashion2.jpg', 'women_hippie_fashion3.jpg', 'women_hippie_fashion4.jpg', 'women_hippie_fashion5.jpg', 'women_hippie_fashion6.png']}" var="image">
+                                <p:graphicImage name="img/women_hippie_fashion/#{image}" styleClass="content" />
+                            </p:contentFlow>
+                            <p:carousel value="#{['women_hippie_fashion1.png', 'women_hippie_fashion2.jpg', 'women_hippie_fashion3.jpg', 'women_hippie_fashion4.jpg', 'women_hippie_fashion5.jpg', 'women_hippie_fashion6.png']}"
+                                        headerText="${msg['text.home.schedule.theme.women']}" var="pic" itemStyle="text-align:center" responsive="true" styleClass="customTitleBar"
+                                        autoPlayInterval="5000">
+                                <img src="resources/img/women_hippie_fashion/#{pic}" height="300"/>
+                            </p:carousel-->
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-6">
+                            <p class="welcome-text-normal"><h:outputText value="${msg['text.home.schedule.theme.women']}"/></p>
+                            <p:galleria value="#{['women_hippie_fashion1.png', 'women_hippie_fashion2.jpg', 'women_hippie_fashion3.jpg', 'women_hippie_fashion4.jpg', 'women_hippie_fashion5.jpg', 'women_hippie_fashion6.png']}" var="image" panelHeight="300" panelWidth="500" showCaption="false" showFilmstrip="false">
+                                <p:graphicImage name="img/women_hippie_fashion/#{image}" style="display: flex; align-items: center; max-height: 100%; min-height: 100%; margin-left: auto; margin-right: auto;"/>
+                            </p:galleria>
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <p class="welcome-text-normal"><h:outputText value="${msg['text.home.schedule.theme.men']}"/></p>
+                            <p:galleria value="#{['men_hippie_fashion1.jpg', 'men_hippie_fashion2.jpg', 'men_hippie_fashion3.jpg', 'men_hippie_fashion4.jpg', 'men_hippie_fashion5.jpg', 'men_hippie_fashion6.jpg', 'men_hippie_fashion7.jpg']}" var="image" panelHeight="300" panelWidth="500" showCaption="false" showFilmstrip="false">
+                                <p:graphicImage name="img/men_hippie_fashion/#{image}" style="display: flex; align-items: center; max-height: 100%; min-height: 100%; margin-left: auto; margin-right: auto;"/>
+                            </p:galleria>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+
+                    <!-- Lodging -->
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-12">
+                            <hr style="height:2px;border:none;color:#333;background-color:#333;"/>
+                            <h1 style="text-align: center;"><h:outputText value="${msg['text.home.lodging.heading']}"/></h1>
+                            <p style="text-align: center" class="welcome-text-normal">
+                                <h:outputText value="${msg['text.home.lodging.1']}"/><br/>
+                                <p:link value="Booking.com, #{msg['text.home.lodging.vilnius_center']}" target="_blank" href="http://www.booking.com/searchresults.en-gb.html?dcid=4&amp;label=gen173nr-1DCAEoggJCAlhYSDNiBW5vcmVmaE2IAQGYAS64AQrIAQzYAQPoAQGoAgM&amp;lang=en-gb&amp;sid=b7a3c79264aa0b7dbed8b54dafa7382e&amp;src=searchresults&amp;si=ai%2Cco%2Cci%2Cre%2Cdi&amp;error_url=http%3A%2F%2Fwww.booking.com%2Fsearchresults.en-gb.html%3Flabel%3Dgen173nr-1DCAEoggJCAlhYSDNiBW5vcmVmaE2IAQGYAS64AQrIAQzYAQPoAQGoAgM%3Bsid%3Db7a3c79264aa0b7dbed8b54dafa7382e%3Bdcid%3D4%3Bcheckin_monthday%3D22%3Bcheckin_year_month%3D2016-7%3Bcheckout_monthday%3D23%3Bcheckout_year_month%3D2016-7%3Bclass_interval%3D1%3Bdest_id%3D3860%3Bdest_type%3Ddistrict%3Bdtdisc%3D0%3Bgroup_adults%3D2%3Bgroup_children%3D0%3Bhlrd%3D0%3Bhyb_red%3D0%3Binac%3D0%3Blabel_click%3Dundef%3Bnha_red%3D0%3Bno_rooms%3D1%3Boffset%3D0%3Bpostcard%3D0%3Bredirected_from_city%3D0%3Bredirected_from_landmark%3D0%3Bredirected_from_region%3D0%3Breview_score_group%3Dempty%3Broom1%3DA%252CA%3Bsb_price_type%3Dtotal%3Bscore_min%3D0%3Bsi%3Dai%252Cco%252Cci%252Cre%252Cdi%3Bsrc%3Dindex%3Bss%3DVilnius%2520Old%2520Town%252C%2520Vilnius%252C%2520Vilnius%2520county%252C%2520Lithuania%3Bss_all%3D0%3Bss_raw%3Dvilnius%3Bssb%3Dempty%3Bsshis%3D0%3Bssuit%3D1%26%3B&amp;ss=Vilnius+City+Centre%2C+Vilnius%2C+Vilnius+county%2C+Lithuania&amp;ssne=Vilnius+Old+Town&amp;ssne_untouched=Vilnius+Old+Town&amp;sb_travel_purpose=leisure&amp;checkin_monthday=22&amp;checkin_year_month=2016-7&amp;checkout_monthday=23&amp;checkout_year_month=2016-7&amp;room1=A%2CA&amp;no_rooms=1&amp;group_adults=2&amp;group_children=0&amp;highlighted_hotels=&amp;ac_pageview_id=b6362f7f7a0b0330&amp;ac_suggestion_list_length=7&amp;ac_suggestion_theme_list_length=0&amp;ac_position=1&amp;ac_langcode=en&amp;dest_id=3117&amp;dest_type=district&amp;ss_raw=Vilnius&amp;tfl_cwh=1"/><br/>
+                                <p:link value="Booking.com, Vilnius" target="_blank" href="http://www.booking.com/searchresults.en-gb.html?dcid=4&amp;label=gen173nr-1DCAEoggJCAlhYSDNiBW5vcmVmaE2IAQGYAS64AQrIAQzYAQPoAQGoAgM&amp;lang=en-gb&amp;sid=b7a3c79264aa0b7dbed8b54dafa7382e&amp;src=searchresults&amp;si=ai%2Cco%2Cci%2Cre%2Cdi&amp;error_url=http%3A%2F%2Fwww.booking.com%2Fsearchresults.en-gb.html%3Flabel%3Dgen173nr-1DCAEoggJCAlhYSDNiBW5vcmVmaE2IAQGYAS64AQrIAQzYAQPoAQGoAgM%3Bsid%3Db7a3c79264aa0b7dbed8b54dafa7382e%3Bdcid%3D4%3Bcheckin_monthday%3D22%3Bcheckin_year_month%3D2016-7%3Bcheckout_monthday%3D23%3Bcheckout_year_month%3D2016-7%3Bclass_interval%3D1%3Bdest_id%3D3117%3Bdest_type%3Ddistrict%3Bdtdisc%3D0%3Bgroup_adults%3D2%3Bgroup_children%3D0%3Bhlrd%3D0%3Bhyb_red%3D0%3Binac%3D0%3Blabel_click%3Dundef%3Bnha_red%3D0%3Bno_rooms%3D1%3Boffset%3D0%3Bpostcard%3D0%3Bredirected_from_city%3D0%3Bredirected_from_landmark%3D0%3Bredirected_from_region%3D0%3Breview_score_group%3Dempty%3Broom1%3DA%252CA%3Bsb_price_type%3Dtotal%3Bsb_travel_purpose%3Dleisure%3Bscore_min%3D0%3Bsi%3Dai%252Cco%252Cci%252Cre%252Cdi%3Bsrc%3Dsearchresults%3Bss%3DVilnius%2520City%2520Centre%252C%2520Vilnius%252C%2520Vilnius%2520county%252C%2520Lithuania%3Bss_all%3D0%3Bss_raw%3DVilnius%3Bssb%3Dempty%3Bsshis%3D0%3Bssne_untouched%3DVilnius%2520Old%2520Town%26%3B&amp;ss=Vilnius%2C+Vilnius+county%2C+Lithuania&amp;ssne=Vilnius+City+Centre&amp;ssne_untouched=Vilnius+City+Centre&amp;sb_travel_purpose=leisure&amp;checkin_monthday=22&amp;checkin_year_month=2016-7&amp;checkout_monthday=23&amp;checkout_year_month=2016-7&amp;room1=A%2CA&amp;no_rooms=1&amp;group_adults=2&amp;group_children=0&amp;highlighted_hotels=&amp;ss_raw=vilnius&amp;ac_position=0&amp;ac_langcode=en&amp;dest_id=-2620663&amp;dest_type=city&amp;ac_pageview_id=09362fe232d20165&amp;ac_suggestion_list_length=7&amp;ac_suggestion_theme_list_length=0&amp;tfl_cwh=1"/><br/>
+                                <p:link value="AirBnB, Vilnius, #{msg['text.home.lodging.apartments']}" target="_blank" href="https://www.airbnb.com/s/Vilnius--Vilnius-County--Lithuania?checkin=07%2F22%2F2016&amp;checkout=07%2F23%2F2016&amp;guests=2&amp;room_types%5B%5D=Entire+home%2Fapt&amp;ss_id=ftpbon6i&amp;s_tag=hi29Xgry"/><br/>
+                                <p:link value="AirBnB, Vilnius, #{msg['text.home.lodging.rooms']}" target="_blank" href="https://www.airbnb.com/s/Vilnius--Vilnius-County--Lithuania?checkin=07%2F22%2F2016&amp;checkout=07%2F23%2F2016&amp;guests=2&amp;room_types%5B%5D=Private+room&amp;ss_id=ftpbon6i&amp;s_tag=kbu471KM"/><br/>
+                                <p:link value="Trumpam.lt, Vilnius" target="_blank" href="#{msg['link.home.lodging.trumpap']}"/><br/>
                             </p>
                         </div>
                     </div>
+                    <br/>
+                    <br/>
+                    
+                    <!-- Afterparty -->
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-12">
+                            <hr style="height:2px;border:none;color:#333;background-color:#333;"/>
+                            <h1 style="text-align: center;"><h:outputText value="${msg['text.home.afterparty.heading']}"/></h1>
+                            <p style="text-align: center" class="welcome-text-normal">
+                                <h:outputText value="${msg['text.home.afterparty.1']}"/><br/>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-6">
+                            <img src="resources/img/kaimas.jpg" style="max-width: 94%; min-width: 94%;"/>
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <img src="resources/img/kaimo_hipiai.jpg" style="max-width: 100%; min-width: 100%"/>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-12">
+                            <p style="text-align: center" class="welcome-text-normal">
+                                <h:outputText value="${msg['text.home.afterparty.2']}"/>
+                            </p>
+                            <p class="welcome-text-normal">
+                                <h:outputText value="${msg['text.home.afterparty.3']}"/>
+                            </p>
+                                <ul class="welcome-text-normal" style="line-height: 150%">
+                                    <li><h:outputText value="${msg['text.home.afterparty.list.1']}"/></li>
+                                    <li><h:outputText value="${msg['text.home.afterparty.list.2']}"/></li>
+                                    <li><h:outputText value="${msg['text.home.afterparty.list.3']}"/></li>
+                                    <li><h:outputText value="${msg['text.home.afterparty.list.4']}"/></li>
+                                    <li><h:outputText value="${msg['text.home.afterparty.list.5']}"/></li>
+                                    <li><h:outputText value="${msg['text.home.afterparty.list.6']}"/></li>
+                                    <li><h:outputText value="${msg['text.home.afterparty.list.7']}"/></li>
+                                    <li><h:outputText value="${msg['text.home.afterparty.list.8']}"/></li>
+                                    <li><h:outputText value="${msg['text.home.afterparty.list.9']}"/></li>
+                                    <li><h:outputText value="${msg['text.home.afterparty.list.10']}"/></li>
+                                    <li><h:outputText value="${msg['text.home.afterparty.list.11']}"/></li>
+                                    <li><h:outputText value="${msg['text.home.afterparty.list.12']}"/></li>
+                                </ul>
+                            <p class="welcome-text-normal">
+                                <h:outputText value="${msg['text.home.afterparty.4']}"/><br/>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-12 google-maps" style="max-height: 500px; min-height: 500px">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m26!1m12!1m3!1d21372.954332834703!2d25.735996131207948!3d55.7314838098652!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m11!3e6!4m5!1s0x46dd93fb5c6408f5%3A0x400d18c70e9dc40!2sVilnius%2C+Lithuania!3m2!1d54.687155499999996!2d25.2796514!4m3!3m2!1d55.7318359!2d25.737208!5e0!3m2!1sen!2sfr!4v1462214868038" frameborder="0" style="border:0" marginheight="0" allowfullscreen="true"></iframe>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    
                 </div>    
-                <ui:include src="layout/guest_list_horizontal.xhtml"/>
             </ui:define>
         </ui:composition>
     </body>

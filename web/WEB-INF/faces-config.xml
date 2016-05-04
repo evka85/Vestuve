@@ -51,9 +51,25 @@
     <navigation-rule>
         <from-view-id>rsvp.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>success</from-outcome>
+            <from-outcome>login_success</from-outcome>
             <to-view-id>rsvp.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>           
+    
+<!-- ===================== Contact navigation rules ===================== -->
+    <navigation-rule>
+        <from-view-id>contact.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>login_success</from-outcome>
+            <to-view-id>contact.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>contact.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>           
+    
 </faces-config>

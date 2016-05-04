@@ -52,6 +52,10 @@ public class Guest implements Serializable {
     private String secret;
 
     @Basic()
+    @Column(name = "email", nullable=false)
+    private String email;
+    
+    @Basic()
     @Enumerated(EnumType.STRING)
     @Column(name = "state", nullable=false)
     private AttendanceState state = AttendanceState.UNKNOWN;
@@ -79,6 +83,10 @@ public class Guest implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "attending_afterparty", nullable=false)
     private AttendanceState attendingAfterparty = AttendanceState.UNKNOWN;
+    
+    @Basic()
+    @Column(name = "need_help_with_lodging", nullable=false)
+    private Boolean needHelpWithLodging = false;
     
     //TODO: languages, kids
     
@@ -152,6 +160,22 @@ public class Guest implements Serializable {
 
     public void setGapActivity(GapActivityChoice gapActivity) {
         this.gapActivity = gapActivity;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Boolean getNeedHelpWithLodging() {
+        return needHelpWithLodging;
+    }
+
+    public void setNeedHelpWithLodging(Boolean needHelpWithLodging) {
+        this.needHelpWithLodging = needHelpWithLodging;
     }
 
     @Override

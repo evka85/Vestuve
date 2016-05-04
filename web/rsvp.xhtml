@@ -22,15 +22,16 @@
                             <p style="font-size: 16pt">
                                 <h:outputText value="#{msg['text.rsvp']}"/>
                             </p>
+<!--                            <ui:include src="layout/login_panel.xhtml"/>--> <!-- hmm, this doesn't work right for whatever reason... -->
                             <p:panel id="login_panel" header="#{msg['text.rsvp.f_secret.header']}" visible="#{rsvpView.guest == null}" styleClass="customWidgetHeader">
                                 <h:form id="rsvp_secret_form">
                                     <p:growl id="growl" showDetail="true" sticky="false"/>
                                     <p:messages id="messages" showDetail="true"/>
 
                                     <p:outputLabel for="secret" value="#{msg['text.rsvp.f_secret.label']}"/>
-                                    <p:inputText id="secret" value="#{rsvpView.secret}" required="true" requiredMessage="Please enter the secret phrase"/>
+                                    <p:inputText id="secret" value="#{rsvpView.secret}" required="true" requiredMessage="#{msg['text.rsvp.f_secret.err_null_secret.msg']}"/>
 
-                                    <p:commandButton value="#{msg['text.rsvp.f_secret.btn_go']}" action="#{rsvpView.loadGuest()}" update="login_panel rsvp_data_panel"/>
+                                    <p:commandButton value="#{msg['text.rsvp.f_secret.btn_go']}" action="#{rsvpView.loadGuest()}" update="rsvp_secret_form"/>
                                 </h:form>
                             </p:panel>
                             
@@ -65,56 +66,70 @@
                                     <p:growl id="growl" showDetail="true" sticky="false"/>
                                     
                                     <br/>
-                                    <h:outputLabel for="attending" value="#{msg['text.rsvp.f_data.lbl_attending']}"/>
-                                    <p:selectOneButton id="attending" value="#{rsvpView.guest.state}">
+                                    
+                                    <h:outputLabel for="attending" value="#{msg['text.rsvp.f_data.lbl_attending']}" style="font-weight: bold"/>
+                                    <p:selectOneRadio id="attending" value="#{rsvpView.guest.state}" layout="pageDirection">
                                         <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_UNKNOWN']}" itemValue="UNKNOWN"/>
                                         <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_ATTENDING']}" itemValue="ATTENDING"/>
                                         <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_NOT_ATTENDING']}" itemValue="NOT_ATTENDING"/>
-                                    </p:selectOneButton>
+                                    </p:selectOneRadio>
                                     
                                     <br/>
-                                    <h:outputLabel for="attending_church" value="#{msg['text.rsvp.f_data.lbl_attending_church']}"/>
-                                    <p:selectOneButton id="attending_church" value="#{rsvpView.guest.attendingChurch}">
+                                    
+                                    <h:outputLabel for="attending_church" value="#{msg['text.rsvp.f_data.lbl_attending_church']}" style="font-weight: bold"/>
+                                    <p:selectOneRadio id="attending_church" value="#{rsvpView.guest.attendingChurch}" layout="pageDirection">
                                         <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_UNKNOWN']}" itemValue="UNKNOWN"/>
                                         <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_ATTENDING']}" itemValue="ATTENDING"/>
                                         <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_NOT_ATTENDING']}" itemValue="NOT_ATTENDING"/>
-                                    </p:selectOneButton>
+                                    </p:selectOneRadio>
                                     
                                     <br/>
-                                    <h:outputLabel for="gap_activity" value="#{msg['text.rsvp.f_data.lbl_gap_activity']}"/>
-                                    <p:selectOneButton id="gap_activity" value="#{rsvpView.guest.gapActivity}">
+                                    
+                                    <h:outputLabel for="gap_activity" value="#{msg['text.rsvp.f_data.lbl_gap_activity']}" style="font-weight: bold"/>
+                                    <p:selectOneRadio id="gap_activity" value="#{rsvpView.guest.gapActivity}" layout="pageDirection">
                                         <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_gap_activity_UNKNOWN']}" itemValue="UNKNOWN"/>
                                         <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_gap_activity_BUS']}" itemValue="BUS"/>
                                         <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_gap_activity_TOUR_VILNIUS']}" itemValue="TOUR_VILNIUS"/>
                                         <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_gap_activity_TOUR_PRESIDENT_OFFICE']}" itemValue="TOUR_PRESIDENT_OFFICE"/>
                                         <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_gap_activity_FREE_TIME']}" itemValue="FREE_TIME"/>
-                                    </p:selectOneButton>
+                                    </p:selectOneRadio>
                                     
                                     <br/>
-                                    <h:outputLabel for="menu_choice" value="#{msg['text.rsvp.f_data.lbl_menu_choice']}"/>
-                                    <p:selectOneButton id="menu_choice" value="#{rsvpView.guest.menuChoice}">
+                                    
+                                    <h:outputLabel for="menu_choice" value="#{msg['text.rsvp.f_data.lbl_menu_choice']}" style="font-weight: bold"/>
+                                    <p:selectOneRadio id="menu_choice" value="#{rsvpView.guest.menuChoice}" layout="pageDirection">
                                         <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_menu_choice_UNKNOWN']}" itemValue="UNKNOWN"/>
                                         <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_menu_choice_PORK']}" itemValue="PORK"/>
                                         <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_menu_choice_CHICKEN']}" itemValue="CHICKEN"/>
                                         <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_menu_choice_VEGETARIAN']}" itemValue="VEGETARIAN"/>
-                                    </p:selectOneButton>
+                                    </p:selectOneRadio>
 
                                     <br/>
-                                    <h:outputLabel for="attending_afterparty" value="#{msg['text.rsvp.f_data.lbl_attending_afterparty']}"/>
-                                    <p:selectOneButton id="attending_afterparty" value="#{rsvpView.guest.attendingAfterparty}">
+                                    
+                                    <h:outputLabel for="attending_afterparty" value="#{msg['text.rsvp.f_data.lbl_attending_afterparty']}" style="font-weight: bold"/>
+                                    <p:selectOneRadio id="attending_afterparty" value="#{rsvpView.guest.attendingAfterparty}" layout="pageDirection">
                                         <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_UNKNOWN']}" itemValue="UNKNOWN"/>
                                         <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_ATTENDING']}" itemValue="ATTENDING"/>
                                         <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_NOT_ATTENDING']}" itemValue="NOT_ATTENDING"/>
-                                    </p:selectOneButton>
+                                    </p:selectOneRadio>
+                                    
+                                    <h:outputLabel for="help_with_lodging" value="#{msg['text.rsvp.f_data.lbl_help_with_lodging']}" style="font-weight: bold"/>
+                                    <p:selectOneRadio id="help_with_lodging" value="#{rsvpView.guest.needHelpWithLodging}" layout="pageDirection">
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_help_with_lodging.no']}" itemValue="false"/>
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_help_with_lodging.yes']}" itemValue="true"/>
+                                    </p:selectOneRadio>
                                     
                                     <br/>
-                                    <p:commandButton value="#{msg['text.rsvp.f_data.btn_save']}" action="#{rsvpView.saveGuestInfo()}" update="login_panel rsvp_data_panel"/>
-<!--                                    <p:steps activeIndex="1" readonly="false" styleClass="custom">
-                                        <p:menuitem value="Personal" url="#" />
-                                        <p:menuitem value="Seat Selection" url="#"/>
-                                        <p:menuitem value="Payment" url="#"/>
-                                        <p:menuitem value="Confirmation" url="#"/>
-                                    </p:steps>-->
+
+                                    <h:outputLabel for="input_email" value="#{msg['text.rsvp.f_data.lbl_email']}" style="font-weight: bold"/>
+                                    <p:inputText id="input_email" value="#{rsvpView.guest.email}" validatorMessage="#{msg['text.rsvp.f_secret.err_invalid_email.msg']}" required="false">
+                                        <f:validateRegex pattern="(^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$)?" />
+                                    </p:inputText>
+                                    
+                                    <br/>
+                                    
+                                    <p:commandButton value="#{msg['text.rsvp.f_data.btn_save']}" action="#{rsvpView.saveGuestInfo()}" update="rsvp_data_panel"/>
+
                                 </h:form>
                             </p:panel>
                         </div>

@@ -21,9 +21,37 @@
                             <p style="font-size: 16pt">
                                 <h:outputText value="#{msg['text.contact']}"/>
                             </p>
+                            <p:panel id="login_panel" header="#{msg['text.rsvp.f_secret.header']}" visible="#{rsvpView.guest == null}" styleClass="customWidgetHeader">
+                                <h:form id="rsvp_secret_form">
+                                    <p:growl id="growl" showDetail="true" sticky="false"/>
+                                    <p:messages id="messages" showDetail="true"/>
+
+                                    <p:outputLabel for="secret" value="#{msg['text.rsvp.f_secret.label']}"/>
+                                    <p:inputText id="secret" value="#{rsvpView.secret}" required="true" requiredMessage="#{msg['text.rsvp.f_secret.err_null_secret.msg']}"/>
+
+                                    <p:commandButton value="#{msg['text.rsvp.f_secret.btn_go']}" action="#{rsvpView.loadGuest()}" update="rsvp_secret_form"/>
+                                </h:form>
+                            </p:panel>
+                            
+                            <p:panel id="contact_panel" header="#{msg['text.contact.f_contact.header']} (#{rsvpView.guest.name})" visible="#{rsvpView.guest != null}" styleClass="customWidgetHeader">
+                                <h:form id="contact_form">
+                                    <p:messages id="messages" showDetail="true"/>
+
+                                    <h:outputText value="#{msg['text.contact.f_contact.subject']}"/>
+                                    <br/>
+                                    <p:inputText id="subject" value="#{contactView.subject}" required="true" requiredMessage="#{msg['text.contact.f_contact.err_null_subject']}"/>
+                                    
+                                    <br/>
+                                    <h:outputText value="Message:"/>
+                                    <p:inputTextarea id="body" value="#{contactView.body}" required="true" requiredMessage="#{msg['text.contact.f_contact.err_null_body']}" style="width: 100%"/>
+
+                                    <p:commandButton value="#{msg['text.contact.f_contact.btn_submit']}" actionListener="#{contactView.send}" update="contact_form"/>
+                                </h:form>
+                            </p:panel>                            
                         </div>
                     </div>
                 </div>    
+                <div style="height: 100px"/>
                 <ui:include src="layout/guest_list_horizontal.xhtml"/>
             </ui:define>
         </ui:composition>

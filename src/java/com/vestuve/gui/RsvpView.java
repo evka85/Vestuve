@@ -78,7 +78,7 @@ public class RsvpView implements Serializable {
         
         secret = "";
         
-        return "success";
+        return "login_success";
     }
     
     public void logout() {
