@@ -30,7 +30,7 @@ import javax.persistence.UniqueConstraint;
         @UniqueConstraint(columnNames={"secret"})
 })
 @NamedQueries({
-    @NamedQuery(name = "Guest.findBySecret", query = "select g from Guest as g where g.secret = :secret"),
+    @NamedQuery(name = "Guest.findBySecret", query = "select g from Guest as g where upper(g.secret) = upper(:secret)"),
     @NamedQuery(name = "Guest.findAll", query = "select g from Guest as g order by g.name"),
     @NamedQuery(name = "Guest.findAllValid", query = "select g from Guest as g where g.state <> com.vestuve.model.AttendanceState.NOT_ATTENDING order by g.name")
 })

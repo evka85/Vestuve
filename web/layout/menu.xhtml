@@ -20,9 +20,9 @@
                     <p:menuitem value="#{msg['menu.chat']}" action="navChat"/>
                     
                     <f:facet name="options">
-                        <h:outputText value="#{rsvpView.guest.name}" rendered="#{rsvpView.guest != null}" style="float: left; height: 100%"/>
-                        <h:commandLink value="#{msg['menu.logout']}" action="navHome" actionListener="#{rsvpView.logout}" rendered="#{rsvpView.guest != null}" style="float: left; height: 100%"/>
-                        <h:commandLink value="#{msg['menu.login']}" action="navRsvp" rendered="#{rsvpView.guest == null}" style="float: left; height: 100%"/>
+                        <span style="padding-right: 10px"><h:outputText value="#{rsvpView.guest.name}" rendered="#{rsvpView.guest != null}" style="float: left; height: 100%"/></span>
+                        <span style="padding-right: 10px"><h:commandLink value="#{msg['menu.logout']}" action="navHome" actionListener="#{rsvpView.logout}" rendered="#{rsvpView.guest != null}" style="float: left; height: 100%"/></span>
+                        <span style="padding-right: 10px"><h:commandLink value="#{msg['menu.login']}" action="navRsvp" rendered="#{rsvpView.guest == null}" style="float: left; height: 100%"/></span>
                         <h:commandLink styleClass="flag gb" value="English" action="#{language.changeLanguage('us')}" style="padding-right: 15px"/>
                         <h:commandLink styleClass="flag lt" value="Lithuanian" action="#{language.changeLanguage('lt')}" style="padding-right: 15px"/>
                     </f:facet>

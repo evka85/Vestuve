@@ -18,7 +18,8 @@
                 <div class="ui-grid ui-grid-responsive">
 
                     <ui:repeat value="#{guestView.guests}" var="guest" varStatus="status">
-                        <div class="ui-grid-col-1">
+                        <div class="ui-grid-col-2" style="padding-right: 10px; padding-left: 10px; padding-top: 10px">
+                            <span class="welcome-text-normal strong"><h:outputText value="#{guest.name}"/></span>
                             <div style="padding-bottom: 75%; position: relative">
                                 <div style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: hidden">
                                     <img src="#{guest.pictureUrl}" style="width: 100%; z-index: 2"/>

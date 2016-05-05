@@ -108,6 +108,10 @@ public class RsvpView implements Serializable {
         if ((uploadedPicture != null) && (uploadedPicture.getFileName() != null) && (!uploadedPicture.getFileName().isEmpty()) && (guest != null)) {
             byte[] bytes=null;
             bytes = uploadedPicture.getContents();
+            if (bytes.length > 1048576) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getMessage("text.rsvp.f_data.pic_upload_error_too_big.title"),  msg.getMessage("text.rsvp.f_data.pic_upload_error_too_big.msg")));
+                return;
+            }
             String filename = "guest" + guest.getId() + "_" + (new File(uploadedPicture.getFileName())).getName();
             String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath(PICTURE_RESOURCE_DIR);
             BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(path + File.separator + filename)));

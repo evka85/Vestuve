@@ -22,7 +22,7 @@ public class LanguageSwitcher implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
-    private Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
+    private Locale locale = new Locale("lt");
     
     /**
      * Creates a new instance of LanguageSwitcher
