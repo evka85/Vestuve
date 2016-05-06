@@ -37,7 +37,7 @@ public class RsvpView implements Serializable {
 
     private static final long serialVersionUID = 50L;
     
-    private static final String PICTURE_RESOURCE_DIR = "/resources/img/guests/";
+    private static final String DEFAULT_PICTURE_RESOURCE_DIR = "/resources/img/guests/";
 
     private String secret;
     private Guest guest;
@@ -105,6 +105,14 @@ public class RsvpView implements Serializable {
     }
     
     public void uploadPicture() throws IOException {
+        String dir = System.getProperty("GUEST_IMG_DIR");
+        if ((dir == null) || (!(new File(dir).exists()))) {
+            dir = DEFAULT_PICTURE_RESOURCE_DIR;
+        } else {
+            dir += File.separator;
+        }
+        System.out.println("upload dir = " + dir);
+        
         if ((uploadedPicture != null) && (uploadedPicture.getFileName() != null) && (!uploadedPicture.getFileName().isEmpty()) && (guest != null)) {
             byte[] bytes=null;
             bytes = uploadedPicture.getContents();
@@ -113,12 +121,12 @@ public class RsvpView implements Serializable {
                 return;
             }
             String filename = "guest" + guest.getId() + "_" + (new File(uploadedPicture.getFileName())).getName();
-            String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath(PICTURE_RESOURCE_DIR);
+            String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath(dir);
             BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(path + File.separator + filename)));
             stream.write(bytes);
             stream.close();
             
-            String picUrl = PICTURE_RESOURCE_DIR + filename;
+            String picUrl = dir + filename;
             guestDao.updatePicUrl(guest, picUrl);
             guest.setPictureUrl(picUrl);
             
