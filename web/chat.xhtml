@@ -10,15 +10,12 @@
                 <div class="ui-grid ui-grid-responsive">
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-12">
-                            <img src="resources/img/BigBanner.png" style="max-width: 100%"/>
+                            <img src="resources/img/BigBanner.png" style="max-width: 100%; min-width: 100%"/>
                         </div>
                     </div>
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-12">
-                            <h1>
-                                <h:outputText value="#{msg['text.chat.heading']}"/>
-                            </h1>
-                            <p style="font-size: 16pt">
+                            <p class="welcome-text-normal">
                                 <h:outputText value="#{msg['text.chat']}"/>
                             </p>
                             <p:panel id="login_panel" header="#{msg['text.rsvp.f_secret.header']}" visible="#{rsvpView.guest == null}" styleClass="customWidgetHeader">
@@ -33,13 +30,24 @@
                                 </h:form>
                             </p:panel>
                             
-                            <p:panel id="chat_panel" header="#{msg['text.contact.f_contact.header']} (#{rsvpView.guest.name})" visible="#{rsvpView.guest != null}" styleClass="customWidgetHeader">
-                                <h:form id="chat_form">
+                            <p:panel id="chat_panel" header="#{msg['text.chat.chat_window_header']}" visible="#{rsvpView.guest != null}" styleClass="customWidgetHeader">
+                                <p:dataList id="chat_list" value="#{chatView.allMessages}" var="message">
+                                    <h:outputText value="#{message.guest.name}: #{message.msg}"/>
+                                </p:dataList>
+                                <br/>
+                                <h:form id="new_message_form">
+                                    <p:messages id="messages" showDetail="true"/>
+
+                                    <h:outputText value="#{msg['text.contact.f_contact.message']}"/>
+                                    <p:inputTextarea id="body" value="#{chatView.message.msg}" required="true" requiredMessage="#{msg['text.contact.f_contact.err_null_body']}" style="width: 100%"/>
+
+                                    <p:commandButton value="#{msg['text.contact.f_contact.btn_submit']}" actionListener="#{chatView.saveMessage}" update="new_message_form chat_list"/>
                                 </h:form>
-                            </p:panel>                            
+                            </p:panel>
+                            
                         </div>
                     </div>
-                </div>    
+                </div>
                 <div style="height: 100px"/>
                 <ui:include src="layout/guest_list_horizontal.xhtml"/>
             </ui:define>

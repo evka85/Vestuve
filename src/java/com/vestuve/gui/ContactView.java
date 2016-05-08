@@ -27,8 +27,8 @@ public class ContactView implements Serializable {
     private String subject;
     private String body;
     
-//    @Inject
-//    RsvpView rsvpView;
+    @Inject
+    RsvpView rsvpView;
     
     @Inject
     private LanguageSwitcher msg;
@@ -58,7 +58,7 @@ public class ContactView implements Serializable {
         System.out.println("Message body = " + body);
         
         try {
-            EmailSender.sendToBrideAndGroom(subject, body);
+            EmailSender.sendToBrideAndGroom(rsvpView.getGuest().getName(), subject, body);
             
             subject = null;
             body = null;

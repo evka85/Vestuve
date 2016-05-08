@@ -31,8 +31,8 @@ import javax.persistence.UniqueConstraint;
 })
 @NamedQueries({
     @NamedQuery(name = "Guest.findBySecret", query = "select g from Guest as g where upper(g.secret) = upper(:secret)"),
-    @NamedQuery(name = "Guest.findAll", query = "select g from Guest as g order by g.name"),
-    @NamedQuery(name = "Guest.findAllValid", query = "select g from Guest as g where g.state <> com.vestuve.model.AttendanceState.NOT_ATTENDING order by g.name")
+    @NamedQuery(name = "Guest.findAllForAdmin", query = "select g from Guest as g where g.isAdmin = false order by g.state, g.name"),
+    @NamedQuery(name = "Guest.findAllValid", query = "select g from Guest as g where g.state <> com.vestuve.model.AttendanceState.NOT_ATTENDING and g.isAdmin = false order by g.name")
 })
 public class Guest implements Serializable {
 
@@ -88,8 +88,18 @@ public class Guest implements Serializable {
     @Column(name = "need_help_with_lodging", nullable=false)
     private Boolean needHelpWithLodging = false;
     
-    //TODO: languages, kids
+    @Basic()
+    @Column(name = "num_kids", nullable=true)
+    private Integer numKids = 0;
     
+    @Basic()
+    @Column(name = "comments", nullable=true, length = 4096)
+    private String comments;
+
+    @Basic()
+    @Column(name = "is_admin", nullable=false)
+    private Boolean isAdmin = false;
+        
     public Long getId() {
         return id;
     }
@@ -176,6 +186,30 @@ public class Guest implements Serializable {
 
     public void setNeedHelpWithLodging(Boolean needHelpWithLodging) {
         this.needHelpWithLodging = needHelpWithLodging;
+    }
+
+    public Integer getNumKids() {
+        return numKids;
+    }
+
+    public void setNumKids(Integer numKids) {
+        this.numKids = numKids;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public Boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(Boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     @Override

@@ -71,5 +71,20 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>           
+
+    <!-- ===================== Contact navigation rules ===================== -->
+    <navigation-rule>
+        <from-view-id>chat.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>login_success</from-outcome>
+            <to-view-id>chat.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>chat.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>           
     
 </faces-config>

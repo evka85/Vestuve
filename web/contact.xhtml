@@ -10,17 +10,15 @@
                 <div class="ui-grid ui-grid-responsive">
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-12">
-                            <img src="resources/img/BigBanner.png" style="max-width: 100%"/>
+                            <img src="resources/img/BigBanner.png" style="max-width: 100%; min-width: 100%"/>
                         </div>
                     </div>
                     <div class="ui-grid-row">
-                        <div class="ui-grid-col-12">
-                            <h1>
-                                <h:outputText value="#{msg['text.contact.heading']}"/>
-                            </h1>
-                            <p style="font-size: 16pt">
-                                <h:outputText value="#{msg['text.contact']}"/>
-                            </p>
+                        <div class="ui-grid-col-4" style="padding-right: 20px; padding-top: 20px">
+                            <img src="resources/img/mes.png" style="max-width: 100%; min-width: 100%"/>
+                        </div>
+                        <div class="ui-grid-col-8">
+                            <p class="welcome-text-normal"><h:outputText value="#{msg['text.contact']}"/></p>
                             <p:panel id="login_panel" header="#{msg['text.rsvp.f_secret.header']}" visible="#{rsvpView.guest == null}" styleClass="customWidgetHeader">
                                 <h:form id="rsvp_secret_form">
                                     <p:growl id="growl" showDetail="true" sticky="false"/>
@@ -33,7 +31,7 @@
                                 </h:form>
                             </p:panel>
                             
-                            <p:panel id="contact_panel" header="#{msg['text.contact.f_contact.header']} (#{rsvpView.guest.name})" visible="#{rsvpView.guest != null}" styleClass="customWidgetHeader">
+                            <p:panel id="contact_panel" header="#{rsvpView.guest.name}" visible="#{rsvpView.guest != null}" styleClass="customWidgetHeader">
                                 <h:form id="contact_form">
                                     <p:messages id="messages" showDetail="true"/>
 
@@ -42,7 +40,7 @@
                                     <p:inputText id="subject" value="#{contactView.subject}" required="true" requiredMessage="#{msg['text.contact.f_contact.err_null_subject']}"/>
                                     
                                     <br/>
-                                    <h:outputText value="Message:"/>
+                                    <h:outputText value="#{msg['text.contact.f_contact.message']}"/>
                                     <p:inputTextarea id="body" value="#{contactView.body}" required="true" requiredMessage="#{msg['text.contact.f_contact.err_null_body']}" style="width: 100%"/>
 
                                     <p:commandButton value="#{msg['text.contact.f_contact.btn_submit']}" actionListener="#{contactView.send}" update="contact_form"/>

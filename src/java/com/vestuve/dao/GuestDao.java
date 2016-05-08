@@ -32,8 +32,8 @@ public class GuestDao {
         return ret.size() > 0 ? ret.get(0) : null;
     }
     
-    public List<Guest> getAll() {
-        return em.createNamedQuery("Guest.findAll", Guest.class)
+    public List<Guest> getAllForAdmin() {
+        return em.createNamedQuery("Guest.findAllForAdmin", Guest.class)
                 .getResultList();
     }
 

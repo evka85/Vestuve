@@ -74,6 +74,7 @@ public class RsvpView implements Serializable {
         } else {
             String title = String.format(msg.getMessage("text.rsvp.f_secret.success.title"), guest.getName());
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, title,  msg.getMessage("text.rsvp.f_secret.success.msg")));
+            System.out.println("User logged in: " + guest.getName());
         }
         
         secret = "";
@@ -82,6 +83,9 @@ public class RsvpView implements Serializable {
     }
     
     public void logout() {
+        if (guest != null) {
+            System.out.println("User logged out: " + guest.getName());
+        }
         guest = null;
     }
     
@@ -122,7 +126,11 @@ public class RsvpView implements Serializable {
             }
             String filename = "guest" + guest.getId() + "_" + (new File(uploadedPicture.getFileName())).getName();
             String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath(dir);
-            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(path + File.separator + filename)));
+            File f = new File(path + File.separator + filename);
+            if (f.exists()) {
+                f.delete();
+            }
+            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(f));
             stream.write(bytes);
             stream.close();
             

@@ -43,5 +43,8 @@ public class GuestView implements Serializable {
     public List<Guest> getGuests() {
         return guests;
     }
-    
+
+    public List<Guest> getGuestsForAdmin() {
+        return guestDao.getAllForAdmin();
+    }    
 }

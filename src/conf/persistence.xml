@@ -3,6 +3,7 @@
   <persistence-unit name="VestuvePU" transaction-type="JTA">
     <jta-data-source>java:app/jdbc/vestuve</jta-data-source>
     <class>com.vestuve.model.Guest</class>
+    <class>com.vestuve.model.ChatMessage</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>

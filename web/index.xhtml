@@ -14,10 +14,9 @@
                             <img src="resources/img/BigBanner.png" style="max-width: 100%; min-width: 100%"/>
                         </div>
                     </div>
-                    <ui:include src="layout/guest_list_horizontal.xhtml"/>
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-12">
-                            <c:if test="#{language.language == 'en'}">
+                            <c:if test="#{language.language == 'en' or language.language == 'us'}">
                                 <h1 style="text-align: center; text-decoration: underline">Dear Friends!</h1>
                                 <p style="text-align: center" class="welcome-text-normal">
                                     <span>The text below should be translated soon..</span><br/>
@@ -184,7 +183,7 @@
                             <p class="welcome-text-normal">
                                 <h:outputText value="${msg['text.home.afterparty.3']}"/>
                             </p>
-                                <ul class="welcome-text-normal" style="line-height: 150%">
+                                <ul>
                                     <li><h:outputText value="${msg['text.home.afterparty.list.1']}"/></li>
                                     <li><h:outputText value="${msg['text.home.afterparty.list.2']}"/></li>
                                     <li><h:outputText value="${msg['text.home.afterparty.list.3']}"/></li>
@@ -210,6 +209,7 @@
                     </div>
                     <br/>
                     <br/>
+                    <ui:include src="layout/guest_list_horizontal.xhtml"/>
                     
                 </div>    
             </ui:define>

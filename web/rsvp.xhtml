@@ -11,17 +11,23 @@
                 <div class="ui-grid ui-grid-responsive">
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-12">
-                            <img src="resources/img/BigBanner.png" style="max-width: 100%"/>
+                            <img src="resources/img/BigBanner.png" style="max-width: 100%; min-width: 100%"/>
                         </div>
                     </div>
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-12">
-                            <h1>
-                                <h:outputText value="#{msg['text.rsvp.heading']}"/>
-                            </h1>
-                            <p style="font-size: 16pt">
-                                <h:outputText value="#{msg['text.rsvp']}"/>
+                            <!--h1 style="text-align: center; text-decoration: underline"><h:outputText value="#{msg['text.rsvp.heading']}"/></h1-->
+                            <p class="welcome-text-normal">
+                                <span><h:outputText value="#{msg['text.rsvp.1']}"/></span>
+                                <span class="bold"><h:outputText value="#{msg['text.rsvp.2']}"/></span>
+                                <span><h:outputText value="#{msg['text.rsvp.3']}"/></span>
+                                <br/>
+                                <br/>
+                                <span class="bold"><h:outputText value="#{msg['text.rsvp.4']}"/></span>
+                                <span><h:outputText value="#{msg['text.rsvp.5']}"/></span>
+                                <br/>
                             </p>
+
 <!--                            <ui:include src="layout/login_panel.xhtml"/>--> <!-- hmm, this doesn't work right for whatever reason... -->
                             <p:panel id="login_panel" header="#{msg['text.rsvp.f_secret.header']}" visible="#{rsvpView.guest == null}" styleClass="customWidgetHeader">
                                 <h:form id="rsvp_secret_form">
@@ -35,7 +41,7 @@
                                 </h:form>
                             </p:panel>
                             
-                            <p:panel id="rsvp_data_panel" header="#{msg['text.rsvp.f_data.header']} (#{rsvpView.guest.name})" visible="#{rsvpView.guest != null}" styleClass="customWidgetHeader">
+                            <p:panel id="rsvp_data_panel" header="#{rsvpView.guest.name}" visible="#{rsvpView.guest != null and rsvpView.guest.isAdmin == false}" styleClass="customWidgetHeader">
                                 <p:messages id="messages" showDetail="true"/>
 
                                 <p:separator/>
@@ -78,9 +84,9 @@
                                     
                                     <h:outputLabel for="attending_church" value="#{msg['text.rsvp.f_data.lbl_attending_church']}" style="font-weight: bold"/>
                                     <p:selectOneRadio id="attending_church" value="#{rsvpView.guest.attendingChurch}" layout="pageDirection">
-                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_UNKNOWN']}" itemValue="UNKNOWN"/>
-                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_ATTENDING']}" itemValue="ATTENDING"/>
-                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_NOT_ATTENDING']}" itemValue="NOT_ATTENDING"/>
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_church_UNKNOWN']}" itemValue="UNKNOWN"/>
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_church_ATTENDING']}" itemValue="ATTENDING"/>
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_church_NOT_ATTENDING']}" itemValue="NOT_ATTENDING"/>
                                     </p:selectOneRadio>
                                     
                                     <br/>
@@ -93,6 +99,7 @@
                                         <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_gap_activity_TOUR_PRESIDENT_OFFICE']}" itemValue="TOUR_PRESIDENT_OFFICE"/>
                                         <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_gap_activity_FREE_TIME']}" itemValue="FREE_TIME"/>
                                     </p:selectOneRadio>
+                                    <h:outputText value="#{msg['text.rsvp.f_data.lbl_gap_activity_postscript']}"/><br/>
                                     
                                     <br/>
                                     
@@ -105,13 +112,21 @@
                                     </p:selectOneRadio>
 
                                     <br/>
+
+                                    <h:outputLabel for="num_kids" value="#{msg['text.rsvp.f_data.lbl_num_kids']}" style="font-weight: bold"/>
+                                    <p:spinner id="num_kids" value="#{rsvpView.guest.numKids}"/><br/>
+                                    <h:outputText value="#{msg['text.rsvp.f_data.lbl_num_kids_post_script']}"/><br/>
+
+                                    <br/>
                                     
                                     <h:outputLabel for="attending_afterparty" value="#{msg['text.rsvp.f_data.lbl_attending_afterparty']}" style="font-weight: bold"/>
                                     <p:selectOneRadio id="attending_afterparty" value="#{rsvpView.guest.attendingAfterparty}" layout="pageDirection">
-                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_UNKNOWN']}" itemValue="UNKNOWN"/>
-                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_ATTENDING']}" itemValue="ATTENDING"/>
-                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_NOT_ATTENDING']}" itemValue="NOT_ATTENDING"/>
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_afterparty_UNKNOWN']}" itemValue="UNKNOWN"/>
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_afterparty_ATTENDING']}" itemValue="ATTENDING"/>
+                                        <f:selectItem itemLabel="#{msg['text.rsvp.f_data.lbl_attending_afterparty_NOT_ATTENDING']}" itemValue="NOT_ATTENDING"/>
                                     </p:selectOneRadio>
+
+                                    <br/>
                                     
                                     <h:outputLabel for="help_with_lodging" value="#{msg['text.rsvp.f_data.lbl_help_with_lodging']}" style="font-weight: bold"/>
                                     <p:selectOneRadio id="help_with_lodging" value="#{rsvpView.guest.needHelpWithLodging}" layout="pageDirection">
@@ -125,12 +140,56 @@
                                     <p:inputText id="input_email" value="#{rsvpView.guest.email}" validatorMessage="#{msg['text.rsvp.f_secret.err_invalid_email.msg']}" required="false">
                                         <f:validateRegex pattern="(^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$)?" />
                                     </p:inputText>
+                                    <br/><h:outputText value="#{msg['text.rsvp.f_data.lbl_email_postscript']}"/><br/>
+                                    
+                                    <br/>
+
+                                    <h:outputLabel for="comments" value="#{msg['text.rsvp.f_data.lbl_comments']}" style="font-weight: bold"/><br/>
+                                    <p:inputTextarea id="comments" value="#{rsvpView.guest.comments}" maxlength="4090" style="width: 100%"/>
                                     
                                     <br/>
                                     
                                     <p:commandButton value="#{msg['text.rsvp.f_data.btn_save']}" action="#{rsvpView.saveGuestInfo()}" update="rsvp_data_panel"/>
 
                                 </h:form>
+                            </p:panel>
+
+                            <p:panel id="rsvp_admin_panel" header="Labuka #{rsvpView.guest.name} :)* Va musu sveteliu atsakymai" visible="#{rsvpView.guest != null and rsvpView.guest.isAdmin == true}" styleClass="customWidgetHeader">
+                                <p:dataTable value="#{guestView.guestsForAdmin}" var="guest">
+                                    <p:column headerText="Kas">
+                                        <h:outputText value="#{guest.name}"/>
+                                    </p:column>
+                                    <p:column headerText="Ar varo">
+                                        <!--<h:outputText value="#{guest.state}"/>-->
+                                        <img src="#{guest.state == 'ATTENDING' ? 'resources/img/checkbox.png' : guest.state == 'NOT_ATTENDING' ? 'resources/img/sadface.png' : 'resources/img/questionmark.jpg'}" style="max-height: 100%; max-width: 25%"/>
+                                    </p:column>
+                                    <p:column headerText="Ar varo i baznycia">
+                                        <img src="#{guest.attendingChurch == 'ATTENDING' ? 'resources/img/checkbox.png' : guest.attendingChurch == 'NOT_ATTENDING' ? 'resources/img/sadface.png' : 'resources/img/questionmark.jpg'}" style="max-height: 100%; max-width: 25%; text-align: center"/>
+                                        <!--<h:outputText value="#{guest.attendingChurch}"/>-->
+                                    </p:column>
+                                    <p:column headerText="Ar varo i afterparty">
+                                        <img src="#{guest.attendingAfterparty == 'ATTENDING' ? 'resources/img/checkbox.png' : guest.attendingAfterparty == 'NOT_ATTENDING' ? 'resources/img/sadface.png' : 'resources/img/questionmark.jpg'}" style="max-height: 100%; max-width: 25%"/>
+                                        <!--<h:outputText value="#{guest.attendingAfterparty}"/>-->
+                                    </p:column>
+                                    <p:column headerText="Tarpas">
+                                        <h:outputText value="#{guest.gapActivity}"/>
+                                    </p:column>
+                                    <p:column headerText="Reik pagalbos del nakvynes">
+                                        <h:outputText value="#{guest.needHelpWithLodging}"/>
+                                    </p:column>
+                                    <p:column headerText="Ka valgys">
+                                        <h:outputText value="#{guest.menuChoice}"/>
+                                    </p:column>
+                                    <p:column headerText="Kiek vaiku">
+                                        <h:outputText value="#{guest.numKids}"/>
+                                    </p:column>
+                                    <p:column headerText="Emailas">
+                                        <h:outputText value="#{guest.email}"/>
+                                    </p:column>
+                                    <p:column headerText="Komentarai">
+                                        <h:outputText value="#{guest.comments}"/>
+                                    </p:column>
+                                </p:dataTable>
                             </p:panel>
                         </div>
                     </div>

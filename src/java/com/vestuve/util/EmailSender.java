@@ -5,6 +5,7 @@
  */
 package com.vestuve.util;
 
+import java.io.UnsupportedEncodingException;
 import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -28,16 +29,18 @@ public class EmailSender {
         return (Session) c.lookup("mail/main");
     }
 
-    public static void sendToBrideAndGroom(String subject, String body) throws NamingException, MessagingException {
-        send(EMAIL_BRIDE_AND_GROOM, subject, body);
+    public static void sendToBrideAndGroom(String guestName, String subject, String body) throws NamingException, MessagingException, UnsupportedEncodingException {
+        send(EMAIL_BRIDE_AND_GROOM, guestName, subject, body);
     }
     
-    public static void send(String email, String subject, String body) throws NamingException, MessagingException {
+    public static void send(String email, String guestName, String subject, String body) throws NamingException, MessagingException, UnsupportedEncodingException {
         Session mailcern = getMailcern();
         MimeMessage message = new MimeMessage(mailcern);
-        message.setSubject(subject);
+        message.setSubject("Vestuve: " + subject);
         message.setRecipients(RecipientType.TO, InternetAddress.parse(email, false));
-        message.setText(body);
+//        message.setRecipient(RecipientType.TO, new InternetAddress("evaldas.juska@cern.ch", "Evaldas"));
+        message.setFrom(new InternetAddress("evka85@gmail.com", "Evaldas"));
+        message.setText("Message from " + guestName + ":\n" + body);
         Transport.send(message);
     }
 }
